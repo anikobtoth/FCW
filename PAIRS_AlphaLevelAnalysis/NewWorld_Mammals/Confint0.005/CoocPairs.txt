@@ -1,0 +1,11 @@
+>  File:  NWLgMamm.txt   Species:  126 Sites:   49 MatFill: 0.10 Occ:    597  0.50% Confidence limit  Model: fixed - fixed                      
+Index        File                  In     SimIn  StdDevIn      Z-In   StIndex    SkewIn LowerCLIn UpperCLIn
+Checkerboard NWLgMamm.txt        6144   5726.80     27.55     15.14    0.0729      0.36   5653.00   5806.00
+Combinations NWLgMamm.txt          39     27.18      5.93      1.99    0.4349      0.40     15.00     44.00
+C-Score      NWLgMamm.txt       0.011     0.011     0.000     6.943    0.0302     0.337     0.011     0.011
+Soerensen    NWLgMamm.txt      0.0647    0.0647    0.0013   -0.0191   -0.0004    0.6229    0.0621    0.0689
+Absences     NWLgMamm.txt    1358.161  1358.267    -0.417    -0.106   -0.0001     0.000  1357.829  1358.762
+BR           NWLgMamm.txt         337    346.81      5.02     -1.95    0.5645     -0.28    332.00    357.00
+Correlation  NWLgMamm.txt      0.1254    0.1217    0.0026    1.3969    0.0302    0.0762    0.1141    0.1283
+Variancetest NWLgMamm.txt     29.1701   29.3506    0.0434   -4.1628   -0.0062   -1.1962   29.1665   29.4096
+ 

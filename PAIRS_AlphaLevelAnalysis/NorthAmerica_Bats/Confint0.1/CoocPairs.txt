@@ -1,0 +1,11 @@
+>  File:  NAmBats.txt    Species:  110 Sites:   47 MatFill: 0.12 Occ:    609 10.00% Confidence limit  Model: fixed - fixed                      
+Index        File                  In     SimIn  StdDevIn      Z-In   StIndex    SkewIn LowerCLIn UpperCLIn
+Checkerboard NAmBats.txt         4006   3414.90     47.47     12.45    0.1731      0.25   3335.00   3516.00
+Combinations NAmBats.txt           27     13.98      4.48      2.91    0.9313      0.47      8.00     23.00
+C-Score      NAmBats.txt        0.016     0.015     0.000    18.692    0.1246     0.106     0.014     0.015
+Soerensen    NAmBats.txt       0.1166    0.1086    0.0023    3.5082    0.0738   -0.0696    0.1046    0.1128
+Absences     NAmBats.txt     1072.621  1069.963     0.801     3.319    0.0025    -0.002  1069.227  1070.642
+BR           NAmBats.txt          365    345.01      5.43      3.68    0.5993     -0.18    336.00    353.00
+Correlation  NAmBats.txt       0.1303    0.1143    0.0026    6.1798    0.1395   -0.3691    0.1103    0.1179
+Variancetest NAmBats.txt       7.3946    7.3946   -0.0001    0.0000    0.0000    0.0000    7.3946    7.3946
+ 

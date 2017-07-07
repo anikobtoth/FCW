@@ -1,0 +1,11 @@
+>  File:  WIMamm.txt     Species:  116 Sites:   25 MatFill: 0.15 Occ:    433  0.50% Confidence limit  Model: fixed - fixed                      
+Index        File                  In     SimIn  StdDevIn      Z-In   StIndex    SkewIn LowerCLIn UpperCLIn
+Checkerboard WIMamm.txt          4367   3970.29     35.42     11.20    0.0999      0.43   3899.00   4053.00
+Combinations WIMamm.txt            91     49.88      8.20      5.02    0.8244      0.17     31.00     75.00
+C-Score      WIMamm.txt         0.020     0.020     0.000     3.511    0.0279     0.492     0.019     0.020
+Soerensen    WIMamm.txt        0.1347    0.1343    0.0020    0.2178    0.0033   -0.0935    0.1295    0.1386
+Absences     WIMamm.txt       252.741   253.030     0.252    -1.145   -0.0011     0.238   252.615   253.550
+BR           WIMamm.txt           208    213.16      3.97     -1.30    0.4804      0.41    206.00    223.00
+Correlation  WIMamm.txt        0.1769    0.1816    0.0071   -0.6676   -0.0262    0.1332    0.1668    0.2014
+Variancetest WIMamm.txt        9.6581    9.9199    0.0263   -9.9472   -0.0264   -0.3660    9.8504    9.9694
+ 

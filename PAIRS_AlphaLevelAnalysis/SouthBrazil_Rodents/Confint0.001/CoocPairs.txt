@@ -1,0 +1,11 @@
+>  File:  SBRod.txt      Species:   76 Sites:   27 MatFill: 0.09 Occ:    179  0.10% Confidence limit  Model: fixed - fixed                      
+Index        File                  In     SimIn  StdDevIn      Z-In   StIndex    SkewIn LowerCLIn UpperCLIn
+Checkerboard SBRod.txt           2366   2299.63      8.64      7.68    0.0289      0.25   2281.00   2321.00
+Combinations SBRod.txt             56     33.83      7.92      2.80    0.6553      0.99     18.00     63.00
+C-Score      SBRod.txt          0.010     0.010     0.000     1.656    0.0209     0.253     0.010     0.011
+Soerensen    SBRod.txt         0.0805    0.0767    0.0031    1.2298    0.0495    0.5801    0.0704    0.0875
+Absences     SBRod.txt        429.309   429.318    -0.044    -0.009    0.0000     0.000   429.008   429.695
+BR           SBRod.txt            111    111.70      2.39     -0.29    0.6201      0.08    106.00    117.00
+Correlation  SBRod.txt         0.0646    0.0857    0.0084   -2.5104   -0.2466    0.3508    0.0695    0.1096
+Variancetest SBRod.txt        12.9866   13.0165    0.0629   -0.4755   -0.0023   -1.7845   12.6800   13.1178
+ 

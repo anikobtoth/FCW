@@ -1,0 +1,11 @@
+>  File:  NW_Scarabs.txt Species:   98 Sites:   17 MatFill: 0.14 Occ:    227  0.50% Confidence limit  Model: fixed - fixed                      
+Index        File                  In     SimIn  StdDevIn      Z-In   StIndex    SkewIn LowerCLIn UpperCLIn
+Checkerboard NW_Scarabs.txt      3610   3426.09     14.67     12.54    0.0537      0.11   3398.00   3459.00
+Combinations NW_Scarabs.txt       103     59.47      8.78      4.96    0.7320      0.45     41.00     85.00
+C-Score      NW_Scarabs.txt     0.024     0.024     0.000     2.385    0.0168     0.366     0.024     0.024
+Soerensen    NW_Scarabs.txt    0.1191    0.1194    0.0020   -0.1464   -0.0025    0.2005    0.1154    0.1240
+Absences     NW_Scarabs.txt   119.720   119.790     0.067    -1.044   -0.0006     0.613   119.602   119.989
+BR           NW_Scarabs.txt       139    142.37      2.56     -1.31    0.6123      0.22    135.00    149.00
+Correlation  NW_Scarabs.txt    0.0492    0.0579    0.0037   -2.3217   -0.1488   -0.0254    0.0480    0.0656
+Variancetest NW_Scarabs.txt    9.0846    9.0846    0.0000    0.0000    0.0000    0.0000    9.0846    9.0846
+ 

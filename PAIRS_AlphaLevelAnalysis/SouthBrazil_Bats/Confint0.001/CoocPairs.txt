@@ -1,0 +1,11 @@
+>  File:  SBBats.txt     Species:  107 Sites:   37 MatFill: 0.15 Occ:    583  0.10% Confidence limit  Model: fixed - fixed                      
+Index        File                  In     SimIn  StdDevIn      Z-In   StIndex    SkewIn LowerCLIn UpperCLIn
+Checkerboard SBBats.txt          3161   3058.37     45.17      2.27    0.0336      0.21   2966.00   3183.00
+Combinations SBBats.txt            36     12.21      3.97      6.00    1.9484      0.31      4.00     22.00
+C-Score      SBBats.txt         0.016     0.015     0.000     6.795    0.0699     0.122     0.015     0.016
+Soerensen    SBBats.txt        0.1419    0.1283    0.0027    4.9545    0.1061   -0.0183    0.1217    0.1355
+Absences     SBBats.txt       603.164   601.395     0.519     3.405    0.0029    -0.109   600.271   602.546
+BR           SBBats.txt           271    255.30      5.22      3.01    0.4648      0.05    244.00    266.00
+Correlation  SBBats.txt        0.3506    0.3354    0.0063    2.3998    0.0453    0.2959    0.3222    0.3529
+Variancetest SBBats.txt        6.4683    6.5207    0.0139   -3.7810   -0.0080   -0.4311    6.4853    6.5482
+ 

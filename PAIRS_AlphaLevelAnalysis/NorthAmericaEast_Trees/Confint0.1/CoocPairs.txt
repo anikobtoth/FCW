@@ -1,0 +1,11 @@
+>  File:  ENAmTrees.txt  Species:  148 Sites:   37 MatFill: 0.09 Occ:    520 10.00% Confidence limit  Model: fixed - fixed                      
+Index        File                  In     SimIn  StdDevIn      Z-In   StIndex    SkewIn LowerCLIn UpperCLIn
+Checkerboard ENAmTrees.txt       8250   7824.05     49.06      8.68    0.0544      0.50   7747.00   7905.00
+Combinations ENAmTrees.txt        110     88.63     14.10      1.52    0.2411      0.58     70.00    116.00
+C-Score      ENAmTrees.txt      0.010     0.010     0.000    -0.615   -0.0045     0.277     0.010     0.011
+Soerensen    ENAmTrees.txt     0.0805    0.0847    0.0020   -2.1288   -0.0496    0.2206    0.0818    0.0884
+Absences     ENAmTrees.txt    772.544   773.274     0.263    -2.774   -0.0009     0.062   772.978   773.653
+BR           ENAmTrees.txt        302    306.60      4.12     -1.12    0.5808     -0.01    299.00    313.00
+Correlation  ENAmTrees.txt     0.1059    0.1075    0.0042   -0.3683   -0.0144   -0.0263    0.1008    0.1148
+Variancetest ENAmTrees.txt    31.0091   31.2115    0.0475   -4.2650   -0.0065   -3.5644   31.1363   31.2576
+ 
