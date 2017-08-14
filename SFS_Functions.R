@@ -16,7 +16,7 @@ DGA <- function(nsp = 50, nloc = 20){
 # input: an occupancy matrix of species (rows) by sites (columns)
 # output: returns a distance matrix of pairwise associations calculated using SFS
 
-SFS_Pairwise <- function(x){ #simpairs function, list of simpairs and fisher's test out.
+SFS_Pairwise <- function(x){ #SFS function
   samples = ncol(x)  #S
   z = matrix(nrow=nrow(x),ncol=nrow(x),data=0)
   
