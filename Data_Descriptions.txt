@@ -1,23 +1,6 @@
-SFS data Descriptions
+FCW simulated data Description
 By Anikó B. Tóth
-06/07/2017
+05/22/2018
 
 
-Descriptions of data objects contained in SFS_Datasets.RData
-
-
-ER_Datasets - named list of dataframes; contains raw Ecological Register datasets listed in table 1 with abundances.  
-
-ER_Datasets01 - named list of dataframe; contains raw Ecological Register dataset listed in table 1, converted to presence-absence.
-
-msdsp - Named list of distance objects; contains SFS output for Ecological register datasets
-
-msdfet - Named list of distance objects; contains FET output for Ecological register datasets
-
-mspairs - Named list of dataframes; contains PAIRS output for Ecological register datasets
-
-mssp - Named list of dataframes; contains SFS output for Ecological register datasets (equivalent of an edge list, can be used to make network using igraph package)
-
-msfet - Named list of dataframes; contains FET output for Ecological register datasets (equivalent of an edge list, can be used to make network using igraph package)
-
-** All pairwise weights are in standard score format.  Use pnorm() to convert to raw probabilities. Use qnorm() to convert back to standard scores. 
+Simulated_Datasets.RData contains a data object called simdata. This is a list of the five simulated site by species matrices used in the study. 
