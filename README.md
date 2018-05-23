@@ -4,6 +4,6 @@ Code and data to reproduce analyses in the manuscript,
 
 
 Code for pairwise calculation of FETmP and FET on an occurrence matrix is contained in Pair_Functions.R. This file also contains code to calculate weighted connectance and evenness. Note that PAIRS was run in a separate program. 
-Simulated data used in the main text of the manuscript is in Simulated_Datasets.RData
-Descriptions of each data object are in Data_Descriptions.txt
+Simulated data used in the main text of the manuscript is in Simulated_Datasets.RData.
+A brief description of the data object is in Data_Descriptions.txt.
 
