@@ -3,6 +3,8 @@ library(vegan)
 library(reshape2)
 library(cowplot)
 
+source('~/Desktop/MacQuarie_PhD/Thesis/Chapter1_SimPairs/FCW/Pair_Functions.R')
+
 load("EastAfricanMammalData/speciesData.RData")
 load("EastAfricanMammalData/siteData.RData")
 load("EastAfricanMammalData/Occurrence_data_longformat.RData")
@@ -13,12 +15,12 @@ PA <- namerows(PA)
 pa <- PA[which(rownames(PA) %in% sppdat$BINOMIAL[sppdat$MASS_KG >= 1]),]
 PA <- tobinary(list(PA, pa)) %>% map(clean.empty)
 
-pa <- PA[[2]]
-PA <- PA[[1]]
+pa <- PA[[2]] # species > 1 kg
+PA <- PA[[1]] # all species
 
-### species split ####
+### species split by broad diet ####
 #out <- simpairs(PA) %>% dist2edgelist(PA)
-out <- simpairs(pa) %>% dist2edgelist(pa)
+out <- FETmP_Pairwise(pa) %>% dist2edgelist(pa) #slow step
 out <- out[out$Sp1 != out$Sp2,]
 out$diet.Sp1 <- sppdat[out$Sp1,"DIET1.5"]
 out$diet.Sp2 <- sppdat[out$Sp2,"DIET1.5"]
@@ -26,26 +28,15 @@ out$diet.Sp2 <- sppdat[out$Sp2,"DIET1.5"]
 out$mass.Sp1 <- sppdat[out$Sp1,"MASS_KG"]
 out$mass.Sp2 <- sppdat[out$Sp2,"MASS_KG"]
 
-out$mass.diff <- abs(out$mass.Sp1 - out$mass.Sp2)
+out$Z.Score <- qnorm(out$Score)
 
 out$diet.pair <- map2(out$diet.Sp1, out$diet.Sp2, function(x, y) c(x,y)) %>% map(sort) %>% map(paste, collapse = "-") %>% unlist()
 out$diet.match <- out$diet.Sp1 == out$diet.Sp2
 
 out$type <- posnegzero(out$Z.Score)
-
-out$score <- -1*(pnorm(out$Z.Score)-1)
-
-ggplot(out[!out$type == "ZERO"  & out$diet.match == TRUE, ], aes(y = pnorm(Z.Score), x = diet.pair, fill = diet.pair)) + 
-  geom_boxplot(notch = T) + facet_grid(type~., scales = "free") + 
-  scale_fill_hue(h = c(15, 215, 375), l = c(50, 80, 60), c = c(50, 90, 80)) + 
-  theme(axis.text = element_text(size = 12), axis.title.x = element_blank(), 
-        legend.position = "none", panel.background = element_blank(), panel.border = element_rect(fill = NA)) + 
-  scale_x_discrete(labels = c("carnivores", "herbivores", "omnivores")) + labs(y = "Co-occurrence probability") + 
-  panel_border(remove=F, colour = "black")
-
 out %>% group_by(diet.pair) %>% summarise(agg = percpos(Z.Score))
 
-out2 <- out[!out$type == "ZERO"  & out$diet.match == TRUE & abs(out$Z.Score) >=1.96, ]
+out2 <- out[!out$type == "ZERO"  & out$diet.match == TRUE,]
 ggplot(out2, aes(y = pnorm(Z.Score), x = diet.pair, fill = diet.pair)) + 
   geom_boxplot(notch = T) + facet_grid(type~., scales = "free") + 
   scale_fill_hue(h = c(15, 215, 375), l = c(50, 80, 60), c = c(50, 90, 80)) + 
@@ -57,16 +48,11 @@ ggplot(out2, aes(y = pnorm(Z.Score), x = diet.pair, fill = diet.pair)) +
 out2 %>% group_by(diet.pair) %>% summarise(agg = percpos(Z.Score), count = length(Z.Score))
 
 
-#permanova (Mantel test)
-#Y <- dcast(Sp1~Sp2, data = out, value.var = "score")%>% namerows() %>% as.matrix() %>% as.dist()
-#A <- dcast(Sp1~Sp2, data = out, value.var = "diet.pair") %>% namerows() %>% as.matrix() %>% as.dist()
-
-#adonis(Y~LITTER_SIZE, data = sppdat, permutations = 99, contr.unordered = "contr.SAS")
-
 ### pair split####
 
-out <- simpairs(pa) %>% dist2edgelist(pa)
+out <- FETmP_Pairwise(pa) %>% dist2edgelist(pa)
 out <- out[out$Sp1 != out$Sp2,]
+out$Z.Score <- qnorm(out$Score)
 out$diet.Sp1 <- sppdat[out$Sp1,"DIET2"]
 out$diet.Sp2 <- sppdat[out$Sp2,"DIET2"]
 
@@ -81,61 +67,8 @@ ggplot(out[!out$type == "ZERO", ], aes(y = pnorm(Z.Score), x = diet.match, fill 
         panel.background = element_blank(), panel.border = element_rect(fill = NA)) + 
   scale_fill_hue(h = c(90, 270), l = c(75, 50)) + labs(y = "Co-occurrence probability", x = "Pair diet") + panel_border(remove = F, col = "black")
 
-ggplot(out, aes(x = pnorm(Z.Score), col = diet.match)) + geom_density() + coord_flip() +
-  scale_colour_hue(h = c(90, 270), l = c(75, 50)) + 
-  theme(legend.position = 'none',panel.background = element_blank(), panel.border = element_rect(fill = NA),
-        axis.text = element_text(size = 12), plot.margin = unit(c(0.5, 0, 0.5, .5), "cm")) + 
-  labs(x = "Co-occurrence probability", y = "Relative frequency") 
-
-
 out %>% group_by(diet.match) %>% summarise(agg = percpos(Z.Score), count = length(Z.Score))
 out %>% group_by(diet.match, type) %>% summarise(median = median(pnorm(Z.Score)))
-
-
-out2 <- out[out$type != "ZERO" & abs(out$Z.Score) >=1.96, ]
-
-ggplot(out2, aes(y = pnorm(Z.Score), x = diet.match, fill = diet.match)) + 
-  geom_boxplot(notch = T) + facet_grid(type~., scales = "free") + 
-  scale_x_discrete(labels = c("Different", "Same")) +
-  theme(axis.text = element_text(size = 12), legend.position = "none", 
-        panel.background = element_blank(), panel.border = element_rect(fill = NA)) + 
-  scale_fill_hue(h = c(90, 270), l = c(75, 50)) + labs(y = "Co-occurrence probability", x = "Pair diet") + panel_border(remove = F, col = "black")
-
-out2 %>% group_by(diet.match) %>% summarise(agg = percpos(Z.Score), count = length(Z.Score))
-
-#permanova (Mantel test)
-#Y <- dcast(Sp1~Sp2, data = out, value.var = "score")%>% namerows() %>% as.matrix() %>% as.dist()
-#A <- dcast(Sp1~Sp2, data = out, value.var = "diet.pair") %>% namerows() %>% as.matrix() %>% as.dist()
-
-#adonis(Y~DIET1, data = sppdat, permutations = 99, contr.unordered = "contr.SAS")
-
-
-### site split####
-
-PAs <- list(PA[,which(colnames(PA) %in% sitedat$sitekey[sitedat$LONG < -103])], 
-            PA[,which(colnames(PA) %in% sitedat$sitekey[sitedat$LONG > -103])])
-PAs <- map(PAs, clean.empty, minrow = 1)
-names(PAs) <- c("west", "east")
-
-out <- PAs %>% map(simpairs) %>% map2(PAs, dist2edgelist) %>% bind_rows(.id = "region")
-
-out$region <- factor(out$region, levels = c("west", "east"))
-out$type <- posnegzero(out$Z.Score)
-
-out$diet.Sp1 <- sppdat[out$Sp1,"DIET1"]
-out$diet.Sp2 <- sppdat[out$Sp2,"DIET1"]
-
-out$diet.pair <- map2(out$diet.Sp1, out$diet.Sp2, function(x, y) c(x,y)) %>% map(sort) %>% map(paste, collapse = "-") %>% unlist()
-out$diet.match <- out$diet.Sp1 == out$diet.Sp2
-
-ggplot(out[out$type != "ZERO",], aes(y = pnorm(Z.Score), x = region, fill = region)) + 
-  geom_boxplot(notch = T) + facet_grid(type~., scales = "free")
-
-ggplot(out[out$type != "ZERO",], aes(y = pnorm(Z.Score), x = region, fill = region)) + 
-  geom_boxplot(notch = T) + facet_grid(type~diet.pair, scales = 'free')
-
-ggplot(out[out$type != "ZERO",], aes(y = pnorm(Z.Score), x = diet.pair, fill = diet.pair)) + 
-  geom_boxplot(notch = T) + facet_grid(type~region, scales = 'free')
 
 ##### Time-based site split in pa #####
 
@@ -145,9 +78,10 @@ pas <- list(pa[,which(colnames(pa) %in% sitedat$sitekey[sitedat$timeybp <= 50])]
 pas <- map(pas, clean.empty, minrow = 1)
 names(pas) <- c("Recent", "Historical")
 
-out <- pas %>% map(simpairs) %>% map2(pas, dist2edgelist) %>% bind_rows(.id = "time")
+out <- pas %>% map(FETmP_Pairwise) %>% map2(pas, dist2edgelist) %>% bind_rows(.id = "time")
 out <- out[out$Sp1 != out$Sp2,]
 out$time <- factor(out$time, levels = c("Recent", "Historical"))
+out$Z.Score <- qnorm(out$Score)
 out$type <- posnegzero(out$Z.Score)
 
 out$diet.Sp1 <- sppdat[out$Sp1,"DIET1"]
@@ -198,17 +132,10 @@ ggplot(out[out$type != "ZERO",], aes(y = pnorm(Z.Score), x = diet.match, fill = 
   theme(axis.text.x = element_text(size = 12), axis.text.y = element_text(size = 12),
         legend.position = "none", panel.background = element_blank(), panel.border = element_rect(fill = NA)) 
 
-# not faceted by time. 
-ggplot(out[out$type != "ZERO",], aes(y = pnorm(Z.Score), x = diet.match, fill = diet.match)) + 
-  geom_boxplot(notch = T) + facet_grid(type~., scales = 'free') + 
-  scale_fill_hue(h = c(120, 250, 350), l = c(60, 40, 20)) + labs(y = "Co-occurrence probability", x = "Pair diet") +
-  theme(axis.text.x = element_text(size = 12), axis.text.y = element_text(size = 12),
-        legend.position = "none", panel.background = element_blank(), panel.border = element_rect(fill = NA)) 
-
 out %>% group_by(time) %>% summarise(agg = percpos(Z.Score))
 out %>% group_by(diet.match) %>% summarise(agg = percpos(Z.Score))
 
-#####
+##### Permutation test code template. ####
 outp <- out %>% filter(type == "Segregation", diet.match == TRUE)
 
 d1 <- outp$Z.Score

@@ -150,3 +150,38 @@ clean.empty <- function(x, mincol = 1, minrow = 1){
   return(x)
 }
 
+#dist object to edge list
+dist2edgelist <- function(z, sppDat, linktype=NULL){  #edge list with link types attached
+  k3 = as.data.frame(melt(as.matrix(z)))
+  k3$X1 <- row.names(sppDat)[k3[,1]]
+  k3$X2 <- row.names(sppDat)[k3[,2]] #insert species names
+  k3 <- data.frame(k3$X1, k3$X2, k3$value, id = paste(k3$X1, k3$X2, sep = "-"))
+  colnames(k3) <- c("Sp1", "Sp2", "Score", "id")
+  return(k3)
+}
+
+# groups pairs as positive, negative, or zero.
+posnegzero <- function(x){
+  out <- x > 0
+  out[which(x>0)] <- "Aggregation"
+  out[which(x<0)] <- "Segregation"
+  out[which(x==0)] <- "ZERO"
+  out
+}
+
+
+### 
+percpos <- function(x)
+  length(which(x>0))/length(x)
+
+percneg <- function(x)
+  length(which(x<0))/length(x)
+
+meanpos <- function(x)
+  mean(x[which(x>0)])
+
+meanneg <- function(x)
+  mean(x[which(x<0)])
+##
+
+
