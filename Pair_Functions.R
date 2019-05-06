@@ -125,3 +125,28 @@ weighted_connectance_Bersier <- function(m, z= NULL, cutoff=0){
   return(c(sum(LDp, na.rm = T)/(2*nrow(m)), sum(LDn, na.rm = T)/(2*nrow(m))))
 }
 
+######## HELPER FUNCTIONS ##########
+
+namerows <- function(table){
+  rownames(table) <- table[,1]
+  table <- table[,2:ncol(table)]
+  return(table)
+}
+
+## abundance PA matrices to 0/1 format
+tobinary <- function(PA.LIST){
+  binary <- lapply(PA.LIST, function(x) {
+    x <- x/x
+    x[is.na(x)] <- 0
+    return(x)
+  })
+  return(binary)
+}
+
+# clean empty rows and columns in 1 matrix
+clean.empty <- function(x, mincol = 1, minrow = 1){
+  x <- x[which(rowSums(x) > minrow-1),]
+  x <- x[,which(colSums(x) > mincol-1)]
+  return(x)
+}
+
