@@ -89,7 +89,8 @@ out$diet.Sp2 <- sppdat[out$Sp2,"DIET1"]
 
 out$diet.pair <- map2(out$diet.Sp1, out$diet.Sp2, function(x, y) c(x,y)) %>% map(sort) %>% map(paste, collapse = "-") %>% unlist()
 out$diet.match <- out$diet.Sp1 == out$diet.Sp2
-
+out$diet.match[out$diet.match == TRUE] <- "Same"
+out$diet.match[out$diet.match == FALSE] <- "Different"
 ## Overall difference between time intervals
 b <- ggplot(out[out$type != "ZERO",], aes(y = pnorm(Z.Score), x = time, fill = time)) + 
   geom_boxplot(notch = T) + facet_grid(type~., scales = "free") + labs(x = "Time", y = "Co-occurrence probability") +
